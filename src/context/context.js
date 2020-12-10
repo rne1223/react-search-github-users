@@ -4,7 +4,8 @@ import mockRepos from './mockData.js/mockRepos';
 import mockFollowers from './mockData.js/mockFollowers';
 import axios from 'axios';
 
-const rootUrl = 'https://api.github.com';
+// const rootUrl = 'https://api.github.com';
+const rootUrl = 'https://localhost:3000';
 
 const GithubContext = React.createContext();
 
@@ -26,6 +27,7 @@ const GithubProvider = ({ children }) => {
     const response = await axios(`${rootUrl}/users/${user}`).catch((err) =>
       console.log(err)
     );
+
     if (response) {
       setGithubUser(response.data);
       const { login, followers_url } = response.data;
