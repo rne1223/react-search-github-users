@@ -1,7 +1,7 @@
-import Info from "./Info";
-import Repos from "./Repos";
-import User from "./User";
-import Search from "./Search";
-import Navbar from "./Navbar";
+import Info from "./Info.js";
+import Navbar from "./Navbar.js";
+import Repos from "./Repos.js";
+import Search from "./Search.js";
+import User from "./User.js";
 
-export { Info, Repos, User, Search, Navbar };
+export {Info, Navbar, Repos, Search, User};
