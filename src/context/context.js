@@ -1,4 +1,6 @@
 import React, {useState, useEffect} from 'react';
+
+// Import the mock data api
 import mockUser from './mockData.js/mockUser';
 import mockRepos from './mockData.js/mockRepos';
 import mockFollowers from './mockData.js/mockFollowers';
