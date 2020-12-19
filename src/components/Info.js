@@ -6,7 +6,7 @@ import { GithubContext } from '../context/context';
 
 const Info = () => {
     // Access the data from context.js
-    const {githubUser}= React.useContext(GithubContext);
+    const {githubUser} = React.useContext(GithubContext);
 
     // Get data specific data from context
     const {public_repos, followers, following, public_gist} = githubUser;
