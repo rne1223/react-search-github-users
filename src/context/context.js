@@ -20,34 +20,45 @@ const GithubProvider = ({ children }) => {
 
   //request loading data
   const [requests, setRequests] = useState(0);
-  const [isLoading, setIsLoading] = useState(true);
+  const [isLoading, setIsLoading] = useState(false);
 
   // error
   const [error, setError] = useState({ show: false, msg: "" });
 
   const searchGithubUser = async (user) => {
+    // reset error and add the loading gif
     toggleError();
-    //setLoading(true)
+    setIsLoading(true);
+
+    // get user general information 
     const response = await axios(`${rootUrl}/users/${user}`)
-    .catch((err) =>
-      console.log(err)
-    );
+    .catch(err => console.log(err));
 
     if (response) {
       setGithubUser(response.data);
+      const { login, followers_url } = response.data;
+
+      // Get user repos 
+      axios(`${rootUrl}/users/${login}/repos?per_page=100`)
+      .then(response => setRepos(response.data));
+
+      // Get user followers 
+      axios(`${followers_url}?per_page=100`)
+      .then(response => setFollowers(response.data));
 
     } else {
       toggleError(true, "there is no user with that username");
     }
+
+    checkRequests();
+    setIsLoading(false);
   };
 
   // Check rate
   const checkRequests = () => {
     axios(`${rootUrl}/rate_limit`)
       .then(({ data }) => {
-        let {
-          rate: { remaining },
-        } = data;
+        let { rate: { remaining } } = data;
 
         setRequests(remaining);
         if (remaining === 0) {
